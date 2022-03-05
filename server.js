@@ -3,6 +3,7 @@ const uuid=require('./helpers/uuid')
 const data=require('./db/reviews');
 const { join } = require('path/posix');
 const path=require('path')
+const fs=require('fs')
 const app=express();
 
 
@@ -23,18 +24,19 @@ app.post('/api',(req,res)=>{
     const newdata={status:'successfully recived',
 info:body}
     console.log('after',newdata)
-    // req.body.id=uuid();
-    // console.log(req.body)
+  
     
 
 
     res.json(newdata)
-    // if(req.body){
-    //        const postdata=req.body;
-    // console.log('this is ur data namees',req.body)
-    // }else{
-    //     res.send('no thing to handle it')
-    // }
+    fs.writeFile(`./db/userdata.json`, JSON.stringify(newdata), (err) =>
+    err
+      ? console.error(err)
+      : console.log(
+          `heyyyy `
+        )
+  );
+  
  
 })
 
